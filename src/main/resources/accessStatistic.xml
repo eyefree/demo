@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjrcu.dao.StatisticDao">
+    <!-- entity与数据库字段一一对应-->
+    <resultMap id="statisticMap" type="com.zjrcu.entity.Statistic">
+        <id property="date" column="date"/>
+        <result property="selectCount" column="selectCount"/>
+        <result property="insertCount" column="insertCount"/>
+        <result property="updateCount" column="updateCount"/>
+        <result property="deleteCount" column="deleteCount"/>
+        <result property="insertBatchCount" column="insertBatchCount"/>
+    </resultMap>
+
+    <!-- 查询 -->
+    <select id="select" resultMap="statisticMap">
+        SELECT *
+        FROM access_statistic
+    </select>
+
+    <!-- 插入当前时间-->
+    <insert id="insert" parameterType="String">
+        INSERT INTO access_statistic (date, selectCount, insertCount, updateCount, deleteCount, insertBatchCount,
+                                      updateBatchCount, deleteBatchCount)
+        VALUES (#{date}, 0, 0, 0, 0, 0, 0, 0)
+    </insert>
+
+    <!-- 更新selectCount-->
+    <update id="updateSelectCount" parameterType="String">
+        UPDATE access_statistic
+        set selectCount = selectCount + 1
+        WHERE date = #{date}
+    </update>
+
+    <!-- 更新insertCount -->
+    <update id="updateInsertCount" parameterType="String">
+        UPDATE access_statistic
+        set insertCount = insertCount + 1
+        WHERE date = #{date}
+    </update>
+
+    <!-- 更新updateCount-->
+    <update id="updateUpdateCount" parameterType="String">
+        UPDATE access_statistic
+        set updateCount = updateCount + 1
+        WHERE date = #{date}
+    </update>
+
+    <!-- 更新deleteCount-->
+    <update id="updateDeleteCount" parameterType="String">
+        UPDATE access_statistic
+        set deleteCount = deleteCount + 1
+        WHERE date = #{date}
+    </update>
+
+    <!-- 更新insertBatchCount-->
+    <update id="updateInsertBatchCount" parameterType="String">
+        UPDATE access_statistic
+        set insertBatchCount = insertBatchCount + 1
+        WHERE date = #{date}
+    </update>
+
+    <!-- 更新updateBatchCount-->
+    <update id="updateUpdateBatchCount" parameterType="String">
+        UPDATE access_statistic
+        set updateBatchCount = updateBatchCount + 1
+        WHERE date = #{date}
+    </update>
+
+    <!-- 更新deleteBatchCount-->
+    <update id="updateDeleteBatchCount" parameterType="String">
+        UPDATE access_statistic
+        set deleteBatchCount = deleteBatchCount + 1
+        WHERE date = #{date}
+    </update>
+
+</mapper>

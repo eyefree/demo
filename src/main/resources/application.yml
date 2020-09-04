@@ -1,0 +1,14 @@
+server:
+  port: 9999
+  #服务器路径
+  servlet:
+    context-path: /demo
+#allowMultiQueries=true服务于批量更新
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot?serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+logging:
+  config: src/main/resources/logback.xml
